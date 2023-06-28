@@ -241,4 +241,4 @@ MIT Licensed. See [LICENSE](https://github.com/aztfmods/module-azurerm-kv/blob/m
 
 - [Documentation](https://learn.microsoft.com/en-us/azure/key-vault/)
 - [Rest Api](https://learn.microsoft.com/en-us/rest/api/keyvault/)
-- [Rest Api Specs](https://github.com/Azure/azure-rest-api-specs/tree/1f449b5a17448f05ce1cd914f8ed75a0b568d130/specification/keyvault) az-cn-module-tf-kv
+- [Rest Api Specs](https://github.com/Azure/azure-rest-api-specs/tree/1f449b5a17448f05ce1cd914f8ed75a0b568d130/specification/keyvault)
