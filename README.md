@@ -235,7 +235,7 @@ Module is maintained by [these awesome contributors](https://github.com/cloudnat
 
 ## License
 
-MIT Licensed. See [LICENSE](https://github.com/aztfmods/module-azurerm-kv/blob/main/LICENSE) for full details.
+MIT Licensed. See [LICENSE](https://github.com/cloudnationhq/az-cn-module-tf-kv/blob/main/LICENSE) for full details.
 
 ## References
 
