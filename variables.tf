@@ -1,3 +1,11 @@
-variable "vault" {}
-variable "workload" {}
-variable "environment" {}
+variable "vault" {
+  type = any
+}
+
+variable "workload" {
+  type = string
+}
+
+variable "environment" {
+  type = string
+}
