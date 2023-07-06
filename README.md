@@ -2,11 +2,19 @@
 
  This terraform module simplifies the creation and management of azure key vault resources, providing customizable options for access policies, key and secret management, and auditing, all managed through code.
 
-The below features and integrations are made available:
+## Goals
 
-- keys, secrets, certificate support
-- certificate issuer support
-- terratest is used to validate different integrations
+The main objective is to create a more logic data structure, achieved by combining and grouping related resources together in a complex object.
+
+The structure of the module promotes reusability. It's intended to be a repeatable component, simplifying the process of building diverse workloads and platform accelerators consistently.
+
+A primary goal is to utilize keys and values in the object that correspond to the REST API's structure. This enables us to carry out iterations, increasing its practical value as time goes on.
+
+## Features
+
+- capability to handle keys, secrets, and certificates.
+- includes support for certificate issuers.
+- utilization of terratest for robust validation.
 
 The below examples shows the usage when consuming the module:
 
