@@ -30,6 +30,6 @@ resource "azurerm_role_assignment" "other" {
   for_each = try({ for ra in var.vault.role_assignments: ra.display_name => ra}, null)
 
   scope                = azurerm_key_vault.keyvault.id
-  role_definition_name = each.value.role_name
+  role_definition_name = each.value.role
   principal_id         = each.value.type == "Application" ? data.azuread_application.app[each.key].object_id : each.value.type == "User" ? data.azuread_user.user[each.key].object_id : each.value.type == "Group" ? data.azuread_group.group[each.key].object_id : data.azuread_service_principal.sp[each.key].object_id
 }
