@@ -167,6 +167,16 @@ resource "azurerm_key_vault_secret" "tls_secret" {
   ]
 }
 
+resource "azurerm_key_vault_secret" "tls_prv_secret" {
+  for_each = {
+    for key in local.tls : key.tls_key => key
+  }
+
+  name         = "${each.value.name}-prv"
+  value        = tls_private_key.tls_key[each.key].private_key_openssh
+  key_vault_id = each.value.key_vault_id
+}
+
 # certificates
 resource "azurerm_key_vault_certificate" "cert" {
   for_each = {
