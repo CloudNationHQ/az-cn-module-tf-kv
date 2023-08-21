@@ -11,7 +11,7 @@ resource "random_string" "random" {
 
 # keyvault
 resource "azurerm_key_vault" "keyvault" {
-  name                = "kv${var.workload}${var.environment}${random_string.random.result}"
+  name                = var.vault.name
   resource_group_name = var.vault.resourcegroup
   location            = var.vault.location
   tenant_id           = data.azurerm_client_config.current.tenant_id
