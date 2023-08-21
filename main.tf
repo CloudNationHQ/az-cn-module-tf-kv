@@ -58,7 +58,9 @@ resource "azurerm_key_vault_certificate_issuer" "issuer" {
 }
 
 # certificate contacts
-resource "azurerm_key_vault_certificate_contacts" "example" {
+resource "azurerm_key_vault_certificate_contacts" "contacts" {
+  for_each = try(var.vault.contacts, {}) != {} ? { "default" : {} } : {}
+
   key_vault_id = azurerm_key_vault.keyvault.id
 
   dynamic "contact" {
