@@ -43,11 +43,5 @@ module "kv" {
         }
       }
     }
-
-    contacts = {
-      admin = {
-        email = "dummy@cloudnation.nl"
-      }
-    }
   }
 }
