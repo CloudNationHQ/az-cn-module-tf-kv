@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.0](https://github.com/CloudNationHQ/az-cn-module-tf-kv/compare/v0.3.0...v0.4.0) (2023-08-24)
+
+
+### Features
+
+* add consistent naming ([#22](https://github.com/CloudNationHQ/az-cn-module-tf-kv/issues/22)) ([095888b](https://github.com/CloudNationHQ/az-cn-module-tf-kv/commit/095888b4a48b0cc8df6b6820adc5a130a830d158))
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#18](https://github.com/CloudNationHQ/az-cn-module-tf-kv/issues/18)) ([00ba4ee](https://github.com/CloudNationHQ/az-cn-module-tf-kv/commit/00ba4eefe6e8378223e5c87a16faa21d2f9e20ba))
+* **deps:** bump github.com/gruntwork-io/terratest in /tests ([#9](https://github.com/CloudNationHQ/az-cn-module-tf-kv/issues/9)) ([7e31c20](https://github.com/CloudNationHQ/az-cn-module-tf-kv/commit/7e31c20e49e90cdeefbb203178d2529756ffe699))
+* **deps:** bump google.golang.org/grpc from 1.51.0 to 1.53.0 in /tests ([#11](https://github.com/CloudNationHQ/az-cn-module-tf-kv/issues/11)) ([b487cb5](https://github.com/CloudNationHQ/az-cn-module-tf-kv/commit/b487cb552a0af82ee83c8d1b6fe8dae2169f1733))
+
 ## [0.3.0](https://github.com/CloudNationHQ/az-cn-module-tf-kv/compare/v0.2.0...v0.3.0) (2023-06-30)
 
 
