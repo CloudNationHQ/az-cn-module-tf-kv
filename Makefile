@@ -1,7 +1,5 @@
 .PHONY: test
 
-export WORKLOAD
-export ENVIRONMENT
 export USECASE
 
 #test_extended:
