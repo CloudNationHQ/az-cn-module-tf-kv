@@ -2,13 +2,18 @@ provider "azurerm" {
   features {}
 }
 
+module "naming" {
+  source = "github.com/cloudnationhq/az-cn-module-tf-naming"
+
+  suffix = ["demo", "dev"]
+}
+
 module "rg" {
   source = "github.com/cloudnationhq/az-cn-module-tf-rg"
 
-  environment = var.environment
-
   groups = {
     demo = {
+      name   = module.naming.resource_group.name
       region = "westeurope"
     }
   }
@@ -17,22 +22,22 @@ module "rg" {
 module "kv" {
   source = "github.com/cloudnationhq/az-cn-module-tf-kv"
 
-  workload    = var.workload
-  environment = var.environment
+  naming = local.naming
 
   vault = {
+    name          = module.naming.key_vault.name_unique
     location      = module.rg.groups.demo.location
     resourcegroup = module.rg.groups.demo.name
 
     secrets = {
       random_string = {
-        example1 = {
+        secret1 = {
           length  = 24
           special = false
         }
       }
-      tls_public_key = {
-        example2 = {
+      tls_keys = {
+        tls1 = {
           algorithm = "RSA"
           rsa_bits  = 2048
         }
@@ -45,5 +50,4 @@ module "kv" {
       }
     }
   }
-  depends_on = [module.rg]
 }

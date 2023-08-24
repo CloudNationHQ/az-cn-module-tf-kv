@@ -24,20 +24,11 @@ The below examples shows the usage when consuming the module:
 module "kv" {
   source = "github.com/cloudnationhq/az-cn-module-tf-kv"
 
-  workload       = var.workload
-  environment    = var.environment
-
   vault = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
-
-    contacts = {
-      admin = {
-        email = "dummy@cloudnation.nl"
-      }
-    }
+    name          = module.naming.key_vault.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
   }
-  depends_on = [module.rg]
 }
 ```
 
@@ -47,18 +38,12 @@ module "kv" {
 module "kv" {
   source = "github.com/cloudnationhq/az-cn-module-tf-kv"
 
-  workload       = var.workload
-  environment    = var.environment
+  naming = local.naming
 
   vault = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
-
-    contacts = {
-      admin = {
-        email = "dummy@cloudnation.nl"
-      }
-    }
+    name          = module.naming.key_vault.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
 
     keys = {
       demo = {
@@ -84,7 +69,6 @@ module "kv" {
       }
     }
   }
-  depends_on = [module.rg]
 }
 ```
 
@@ -94,35 +78,28 @@ module "kv" {
 module "kv" {
   source = "github.com/cloudnationhq/az-cn-module-tf-kv"
 
-  workload       = var.workload
-  environment    = var.environment
+  naming = local.naming
 
   vault = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
-
-    contacts = {
-      admin = {
-        email = "dummy@cloudnation.nl"
-      }
-    }
+    name          = module.naming.key_vault.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
 
     secrets = {
       random_string = {
-        example1 = {
+        secret1 = {
           length  = 24
           special = false
         }
       }
-      tls_public_key = {
-        example2 = {
+      tls_keys = {
+        tls1 = {
           algorithm = "RSA"
           rsa_bits  = 2048
         }
       }
     }
   }
-  depends_on = [module.rg]
 }
 ```
 
@@ -132,35 +109,29 @@ module "kv" {
 module "kv" {
   source = "github.com/cloudnationhq/az-cn-module-tf-kv"
 
-  workload       = var.workload
-  environment    = var.environment
+  naming = local.naming
 
   vault = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
+    demo = {
+      name          = module.naming.key_vault.name_unique
+      location      = module.rg.groups.demo.location
+      resourcegroup = module.rg.groups.demo.name
 
-    contacts = {
-      admin = {
-        email = "dennis.kool@cloudnation.nl"
-      }
-    }
-
-    certs = {
-      example = {
-        issuer             = "Self"
-        subject            = "CN=app1.demo.org"
-        validity_in_months = 12
-        exportable         = true
-
-        key_usage = [
-          "cRLSign", "dataEncipherment",
-          "digitalSignature", "keyAgreement",
-          "keyCertSign", "keyEncipherment"
-        ]
+      certs = {
+        example = {
+          issuer             = "Self"
+          subject            = "CN=app1.demo.org"
+          validity_in_months = 12
+          exportable         = true
+          key_usage = [
+            "cRLSign", "dataEncipherment",
+            "digitalSignature", "keyAgreement",
+            "keyCertSign", "keyEncipherment"
+          ]
+        }
       }
     }
   }
-  depends_on = [module.rg]
 }
 ```
 
@@ -170,18 +141,12 @@ module "kv" {
 module "kv" {
   source = "github.com/cloudnationhq/az-cn-module-tf-kv"
 
-  workload       = var.workload
-  environment    = var.environment
+  naming = local.naming
 
   vault = {
-    location      = module.rg.group.location
-    resourcegroup = module.rg.group.name
-
-    contacts = {
-      admin = {
-        email = "dummy@cloudnation.nl"
-      }
-    }
+    name          = module.naming.key_vault.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
 
     issuers = {
       digicert = {
@@ -192,7 +157,6 @@ module "kv" {
       }
     }
   }
-  depends_on = [module.rg]
 }
 ```
 
@@ -222,8 +186,7 @@ module "kv" {
 | Name | Description | Type | Required |
 | :-- | :-- | :-- | :-- |
 | `vault` | describes key vault related configuration | object | yes |
-| `workload` | contains the workload name used, for naming convention  | string | yes |
-| `environment` | contains shortname of the environment used for naming convention  | string | yes |
+| `naming` | contains naming convention  | string | yes |
 
 ## Outputs
 
@@ -231,6 +194,9 @@ module "kv" {
 | :-- | :-- |
 | `vault` | contains all key vault config |
 | `kv_keys` | contains all keyvault keys |
+| `kv_secrets` | contains all keyvault secrets |
+| `kv_tls_public_keys` | contains all tls public keys |
+| `kv_tls_private_keys` | contains all private tls keys |
 
 ## Testing
 

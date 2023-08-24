@@ -6,14 +6,14 @@ output "kv_keys" {
   value = azurerm_key_vault_key.kv_keys
 }
 
-output "random_string" {
+output "kv_secrets" {
   value = azurerm_key_vault_secret.secret
 }
 
-output "tls_public_key" {
-  value = azurerm_key_vault_secret.tls_secret
+output "tls_public_keys" {
+  value = azurerm_key_vault_secret.tls_public_key_secret
 }
 
-# output "merged_ids" {
-#   value = values(azurerm_key_vault.keyvault)[*].id
-# }
+output "tls_private_keys" {
+  value = azurerm_key_vault_secret.tls_private_key_secret
+}

@@ -1,17 +1,8 @@
 data "azurerm_client_config" "current" {}
 
-# generate random id
-resource "random_string" "random" {
-  length    = 3
-  min_lower = 3
-  special   = false
-  numeric   = false
-  upper     = false
-}
-
 # keyvault
 resource "azurerm_key_vault" "keyvault" {
-  name                = "kv${var.workload}${var.environment}${random_string.random.result}"
+  name                = var.vault.name
   resource_group_name = var.vault.resourcegroup
   location            = var.vault.location
   tenant_id           = data.azurerm_client_config.current.tenant_id
@@ -59,6 +50,8 @@ resource "azurerm_key_vault_certificate_issuer" "issuer" {
 
 # certificate contacts
 resource "azurerm_key_vault_certificate_contacts" "example" {
+  for_each = try(var.vault.contacts, {}) != {} ? { "default" : {} } : {}
+
   key_vault_id = azurerm_key_vault.keyvault.id
 
   dynamic "contact" {
@@ -153,13 +146,27 @@ resource "tls_private_key" "tls_key" {
   rsa_bits  = each.value.rsa_bits
 }
 
-resource "azurerm_key_vault_secret" "tls_secret" {
+resource "azurerm_key_vault_secret" "tls_public_key_secret" {
   for_each = {
-    for key in local.tls : key.tls_key => key
+    for item in local.tls : item.tls_key => item
   }
 
-  name         = each.value.name
+  name         = "${each.value.name}-pub"
   value        = tls_private_key.tls_key[each.key].public_key_openssh
+  key_vault_id = each.value.key_vault_id
+
+  depends_on = [
+    azurerm_role_assignment.current
+  ]
+}
+
+resource "azurerm_key_vault_secret" "tls_private_key_secret" {
+  for_each = {
+    for item in local.tls : item.tls_key => item
+  }
+
+  name         = "${each.value.name}-priv"
+  value        = tls_private_key.tls_key[each.key].private_key_pem
   key_vault_id = each.value.key_vault_id
 
   depends_on = [
