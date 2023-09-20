@@ -64,9 +64,8 @@ module "kv" {
     }
 
     issuers = {
-      digicert = {
+      DigiCert = {
         org_id     = "12345"
-        provider   = "DigiCert"
         account_id = "12345"
         password   = "12345"
       }
@@ -83,12 +82,6 @@ module "kv" {
           "digitalSignature", "keyAgreement",
           "keyCertSign", "keyEncipherment"
         ]
-      }
-    }
-
-    contacts = {
-      admin = {
-        email = "dummy@cloudnation.nl"
       }
     }
   }

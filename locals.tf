@@ -5,7 +5,7 @@ locals {
       issuer_key    = issuer_key
       name          = "issuer-${issuer_key}"
       key_vault_id  = azurerm_key_vault.keyvault.id
-      provider_name = issuer.provider
+      provider_name = issuer_key
       account_id    = try(issuer.account_id, null)
       password      = try(issuer.password, null)
       org_id        = try(issuer.org_id, null)
@@ -79,3 +79,4 @@ locals {
     }
   ])
 }
+
