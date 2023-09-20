@@ -10,6 +10,8 @@ The structure of the module promotes reusability. It's intended to be a repeatab
 
 A primary goal is to utilize keys and values in the object that correspond to the REST API's structure. This enables us to carry out iterations, increasing its practical value as time goes on.
 
+A last key goal is to separate logic from configuration in the module, thereby enhancing its scalability, ease of customization, and manageability.
+
 ## Features
 
 - capability to handle keys, secrets, and certificates.
@@ -149,12 +151,7 @@ module "kv" {
     resourcegroup = module.rg.groups.demo.name
 
     issuers = {
-      digicert = {
-        org_id        = "12345"
-        provider_name = "DigiCert"
-        account_id    = "12345"
-        password      = "12345"
-      }
+      DigiCert = { org_id = "12345", account_id = "12345", password = "12345" }
     }
   }
 }
@@ -180,6 +177,7 @@ module "kv" {
 | Name | Type |
 | :-- | :-- |
 | [azurerm_client_config](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | datasource |
+| [azurerm_subscription](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | datasource |
 
 ## Inputs
 
@@ -193,10 +191,10 @@ module "kv" {
 | Name | Description |
 | :-- | :-- |
 | `vault` | contains all key vault config |
-| `kv_keys` | contains all keyvault keys |
-| `kv_secrets` | contains all keyvault secrets |
-| `kv_tls_public_keys` | contains all tls public keys |
-| `kv_tls_private_keys` | contains all private tls keys |
+| `keys` | contains all keyvault keys |
+| `secrets` | contains all keyvault secrets |
+| `tls_public_keys` | contains all tls public keys |
+| `tls_private_keys` | contains all private tls keys |
 
 ## Testing
 
@@ -211,6 +209,12 @@ The second variation is an extended test. This test performs additional validati
 The third variation allows for specific deployment tests. By providing a unique test name in the github workflow, it overrides the default extended test, executing the specific deployment test instead.
 
 Each of these tests contributes to the robustness and resilience of the module. They ensure the module performs consistently and accurately under different scenarios and configurations.
+
+## Notes
+
+Using a dedicated module, we've developed a naming convention for resources that's based on specific regular expressions for each type, ensuring correct abbreviations and offering flexibility with multiple prefixes and suffixes
+
+Full examples detailing all usages, along with integrations with dependency modules, are located in the examples directory
 
 ## Authors
 

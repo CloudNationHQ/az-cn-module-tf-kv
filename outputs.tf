@@ -2,11 +2,15 @@ output "vault" {
   value = azurerm_key_vault.keyvault
 }
 
-output "kv_keys" {
+output "subscriptionId" {
+  value = data.azurerm_subscription.current.subscription_id
+}
+
+output "keys" {
   value = azurerm_key_vault_key.kv_keys
 }
 
-output "kv_secrets" {
+output "secrets" {
   value = azurerm_key_vault_secret.secret
 }
 
