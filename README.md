@@ -198,15 +198,15 @@ module "kv" {
 
 ## Testing
 
-The github repository utilizes a Makefile to conduct tests to evaluate and validate different configurations of the module. These tests are designed to enhance its stability and reliability.
+As a prerequirement, please ensure that both go and terraform are properly installed on your system.
 
-Before initiating the tests, please ensure that both go and terraform are properly installed on your system.
+The [Makefile](Makefile) includes two distinct variations of tests. The first one is designed to deploy different usage scenarios of the module. These tests are executed by specifying the TF_PATH environment variable, which determines the different usages located in the example directory.
 
-The [Makefile](Makefile) incorporates three distinct test variations. The first one, a local deployment test, is designed for local deployments and allows the overriding of workload and environment values. It includes additional checks and can be initiated using the command ```make test_local```.
+To execute this test, input the command ```make test TF_PATH=simple```, substituting simple with the specific usage you wish to test.
 
-The second variation is an extended test. This test performs additional validations and serves as the default test for the module within the github workflow.
+The second variation is known as a extended test. This one performs additional checks and can be executed without specifying any parameters, using the command ```make test_extended```.
 
-The third variation allows for specific deployment tests. By providing a unique test name in the github workflow, it overrides the default extended test, executing the specific deployment test instead.
+Both are designed to be executed locally and are also integrated into the github workflow.
 
 Each of these tests contributes to the robustness and resilience of the module. They ensure the module performs consistently and accurately under different scenarios and configurations.
 
