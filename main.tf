@@ -14,7 +14,7 @@ resource "azurerm_key_vault" "keyvault" {
   enabled_for_template_deployment = try(var.vault.enable.template_deployment, true)
   purge_protection_enabled        = try(var.vault.enable.purge_protection, true)
   enable_rbac_authorization       = try(var.vault.enforce_rbac_auth, true)
-  public_network_access_enabled   = try(var.vault.enable.public_network_access, true)
+  public_network_access_enabled   = try(var.vault.enable.public_network_access, false)
   soft_delete_retention_days      = try(var.vault.retention_in_days, null)
 
   lifecycle {
@@ -206,4 +206,26 @@ resource "azurerm_key_vault_certificate" "cert" {
   depends_on = [
     azurerm_role_assignment.current
   ]
+}
+
+# private endpoint
+resource "azurerm_private_endpoint" "endpoint" {
+  for_each = contains(keys(var.vault), "private_endpoint") ? { "default" = var.vault.private_endpoint } : {}
+
+  name                = var.vault.private_endpoint.name
+  location            = var.vault.location
+  resource_group_name = var.vault.resourcegroup
+  subnet_id           = var.vault.private_endpoint.subnet
+
+  private_service_connection {
+    name                           = "endpoint"
+    is_manual_connection           = try(each.value.is_manual_connection, false)
+    private_connection_resource_id = azurerm_key_vault.keyvault.id
+    subresource_names              = each.value.subresources
+  }
+
+  private_dns_zone_group {
+    name                 = "default"
+    private_dns_zone_ids = var.vault.private_endpoint.dns_zones
+  }
 }

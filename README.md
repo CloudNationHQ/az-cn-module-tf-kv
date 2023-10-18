@@ -17,6 +17,8 @@ A last key goal is to separate logic from configuration in the module, thereby e
 - capability to handle keys, secrets, and certificates.
 - includes support for certificate issuers.
 - utilization of terratest for robust validation.
+- supports key rotation policy for enhanced security and compliance.
+- integrates seamlessly with private endpoint capabilities for direct and secure connectivity.
 
 The below examples shows the usage when consuming the module:
 
