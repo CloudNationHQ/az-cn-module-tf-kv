@@ -1,7 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
 module "naming" {
   source = "github.com/cloudnationhq/az-cn-module-tf-naming"
 
