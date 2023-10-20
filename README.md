@@ -238,6 +238,15 @@ module "private_dns" {
 | `tls_public_keys` | contains all tls public keys |
 | `tls_private_keys` | contains all private tls keys |
 
+## Examples
+
+- [multiple key vaults configuration](https://github.com/cloudnationhq/az-cn-module-tf-kv/tree/main/examples/multiple/main.tf)
+- [key vault secrets integration](https://github.com/cloudnationhq/az-cn-module-tf-kv/tree/main/examples/secrets/main.tf)
+- [key vault keys management ](https://github.com/cloudnationhq/az-cn-module-tf-kv/tree/main/examples/keys/main.tf)
+- [key vault using certificates](https://github.com/cloudnationhq/az-cn-module-tf-kv/tree/main/examples/certs/main.tf)
+- [certificate issuers within key vault](https://github.com/cloudnationhq/az-cn-module-tf-kv/tree/main/examples/cert-issuer/main.tf)
+- [key vault using private endpoint](https://github.com/cloudnationhq/az-cn-module-tf-kv/tree/main/examples/private-endpoint/main.tf)
+
 ## Testing
 
 As a prerequirement, please ensure that both go and terraform are properly installed on your system.
