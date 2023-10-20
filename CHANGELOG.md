@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0](https://github.com/CloudNationHQ/az-cn-module-tf-kv/compare/v0.5.0...v0.6.0) (2023-10-20)
+
+
+### Features
+
+* add private link support and private dns sub module ([#35](https://github.com/CloudNationHQ/az-cn-module-tf-kv/issues/35)) ([d208c01](https://github.com/CloudNationHQ/az-cn-module-tf-kv/commit/d208c01c67716984d7f6de1ef154dc282da6ef87))
+* cleanup redundant provider blocks in example usages ([#34](https://github.com/CloudNationHQ/az-cn-module-tf-kv/issues/34)) ([2fe879b](https://github.com/CloudNationHQ/az-cn-module-tf-kv/commit/2fe879b72e1d74c8ff08be8e80a47f7d9ff53a06))
+* **deps:** bump github.com/Azure/azure-sdk-for-go/sdk/azidentity ([#32](https://github.com/CloudNationHQ/az-cn-module-tf-kv/issues/32)) ([1df4a27](https://github.com/CloudNationHQ/az-cn-module-tf-kv/commit/1df4a27da8cbc50c05fc6c5b2e588dbbfc8a1d6c))
+* **deps:** bump github.com/stretchr/testify in /tests ([#29](https://github.com/CloudNationHQ/az-cn-module-tf-kv/issues/29)) ([e858435](https://github.com/CloudNationHQ/az-cn-module-tf-kv/commit/e85843524aea278aa72ba99a3cebaa4ab7c728fb))
+* **deps:** bump golang.org/x/net from 0.14.0 to 0.17.0 in /tests ([#31](https://github.com/CloudNationHQ/az-cn-module-tf-kv/issues/31)) ([f40cd52](https://github.com/CloudNationHQ/az-cn-module-tf-kv/commit/f40cd52887f3da7d0214604bb98ed2dafcfc315e))
+* update documentation ([#27](https://github.com/CloudNationHQ/az-cn-module-tf-kv/issues/27)) ([9b19e88](https://github.com/CloudNationHQ/az-cn-module-tf-kv/commit/9b19e883a07eac209b8a40db24788ec04b9d9d34))
+
 ## [0.5.0](https://github.com/CloudNationHQ/az-cn-module-tf-kv/compare/v0.4.0...v0.5.0) (2023-09-20)
 
 
