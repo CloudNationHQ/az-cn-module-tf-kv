@@ -17,6 +17,8 @@ A last key goal is to separate logic from configuration in the module, thereby e
 - capability to handle keys, secrets, and certificates.
 - includes support for certificate issuers.
 - utilization of terratest for robust validation.
+- supports key rotation policy for enhanced security and compliance.
+- integrates seamlessly with private endpoint capabilities for direct and secure connectivity.
 
 The below examples shows the usage when consuming the module:
 
@@ -157,6 +159,45 @@ module "kv" {
 }
 ```
 
+## Usage: private endpoint
+
+```hcl
+module "kv" {
+  source = "github.com/cloudnationhq/az-cn-module-tf-kv"
+
+  vault = {
+    name          = module.naming.key_vault.name_unique
+    location      = module.rg.groups.demo.location
+    resourcegroup = module.rg.groups.demo.name
+
+    private_endpoint = {
+      name         = module.naming.private_endpoint.name
+      dns_zones    = [module.private_dns.zone.id]
+      subnet       = module.network.subnets.sn1.id
+      subresources = ["vault"]
+    }
+  }
+}
+```
+
+To enable private link, the below private dns submodule can be employed:
+
+```hcl
+module "private_dns" {
+  source = "github.com/cloudnationhq/az-cn-module-tf-kv/modules/private-dns"
+
+  providers = {
+    azurerm = azurerm.connectivity
+  }
+
+  zone = {
+    name          = "privatelink.vaultcore.azure.net"
+    resourcegroup = "rg-dns-shared-001"
+    vnet          = module.network.vnet.id
+  }
+}
+```
+
 ## Resources
 
 | Name | Type |
@@ -171,6 +212,7 @@ module "kv" {
 | [azurerm_key_vault_secret](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_secret) | resource |
 | [key_vault_certificate_issuer](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_certificate_issuer) | resource |
 | [azurerm_key_vault_certificate_contacts](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_certificate_contacts) | resource |
+| [azurerm_private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
 
 ## Data Sources
 
@@ -215,6 +257,8 @@ Each of these tests contributes to the robustness and resilience of the module. 
 Using a dedicated module, we've developed a naming convention for resources that's based on specific regular expressions for each type, ensuring correct abbreviations and offering flexibility with multiple prefixes and suffixes
 
 Full examples detailing all usages, along with integrations with dependency modules, are located in the examples directory
+
+To integrate seamlessly with the enterprise scale's centrally managed private dns zones within a connectivity subscription, you can employ the private dns submodule, designed to work effectively with an aliased provider.
 
 ## Authors
 
